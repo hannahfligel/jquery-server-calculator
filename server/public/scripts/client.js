@@ -43,7 +43,7 @@ function calculate(){
         firstNumber: $( '#firstNumIn' ).val(),
         secondNumber: $( '#secondNumIn' ).val(),
         //set to start as an empty string
-        operation: operator,
+        operation: operator
     }
     console.log( 'sending:', objectToSend );
     // make AJAX POST with the object

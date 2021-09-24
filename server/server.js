@@ -25,8 +25,19 @@ app.get( '/calculation', ( req, res )=>{
 app.post( '/calculation', ( req, res )=>{
     console.log('hit on POST/calculations:', req.body);
     let el = req.body
-    if(el.operation === '+')
-    el.answer = 
+    let answer = 0;
+    if(el.operation === '+'){
+        answer = Number(el.firstNumber) + Number(el.secondNumber);
+    }
+    else if (el.operation === '-'){
+        answer = Number(el.firstNumber) - Number(el.secondNumber);
+    }
+    else if(el.operation === '*'){
+        answer = Number(el.firstNumber) * Number(el.secondNumber);
+    }
+    else if(el.operation === '/'){
+        answer = Number(el.firstNumber) / Number(el.secondNumber);
+    }
+    console.log(answer);
     res.send( 200 ); // generic "OK", 201 = "CREATED"
 })
-
