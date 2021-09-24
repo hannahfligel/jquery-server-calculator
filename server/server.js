@@ -1,29 +1,32 @@
-// requires 
-let express = require ( 'express' );
-let app = express();
-
+//requires
+const express = require( 'express' );
+const app = express();
+const bodyParser = require( 'body-parser' );
+const { response } = require('express');
 // uses
-
-// global
+app.use( express.static( 'server/public' ) );
+app.use( bodyParser.urlencoded( { extended: true } ) );
+// globals
 const port = 5000;
-let counter = 0;
-
-
+let calculation = [{ author: 'test', text: 'test text' }]
 // spin up server
 app.listen( port, ()=>{
-    console.log('server up on', port);
+    console.log( 'server up on:', port );
 })
+
 
 // routes
-app.get('/', (req, res)=>{
-    //inrement calculator
-    console.log('get route hit');
-    res.send( 'meow' );
+app.get( '/calculation', ( req, res )=>{
+    console.log( '/calculation GET hit' ); // will show in server terminal
+    // res.send( calculation ); // our response
+    res.sendStatus(200);
 })
 
-app.get( '/counter', ( req, res )=>{
-    //increment counter
-    counter++;
-    console.log('/counter GET hit:', counter);
-    res.send( `visits: ${counter}` );
+app.post( '/calculation', ( req, res )=>{
+    console.log('hit on POST/calculations:', req.body);
+    let el = req.body
+    if(el.operation === '+')
+    el.answer = 
+    res.send( 200 ); // generic "OK", 201 = "CREATED"
 })
+
