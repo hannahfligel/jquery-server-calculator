@@ -8,6 +8,7 @@ function onReady(){
     $('#multiply').on('click', multiplyOperator);
     $('#divide').on('click', divideOperator);
     $('#equalIn').on('click', calculate);
+    $('#clearIn').on('click', clearButton);
 } // end onReady
 
 function getCalculation(){
@@ -19,15 +20,27 @@ function getCalculation(){
     }).then( function( response ){
         // if successful
         console.log( 'back from server successfully:', response  );
-        // target output element
-        let el = $( '#calculationOut' );
+        // target output element of the answer only 
+        let answer = $('#answerOut');
         // empty
+        answer.empty();
+        //if the length of the response (calculation array) is 0, append 0
+        if(response.length === 0){
+            answer.append(`<h1>0</h1>`);
+        }
+        else {
+        //append the last index of the calculations array which is an object and target the answer
+            answer.append(`<h1>${response[response.length-1].answer}</h1>`);
+        }
+
+        // target output element of the full equation
+        let el = $( '#calculationOut' );
         el.empty();
         // loop thru array
         for( let i=0; i<response.length; i++){
             // append each on DOM
-            el.append( `<li>${response[i].firstNumber}${response[i].operation}${response[i].secondNumber}=${response[i].answer}</li>`)
-        }
+            el.append( `<li>${response[i].firstNumber}${response[i].operation}${response[i].secondNumber}=${response[i].answer}</li>`)        }   
+
     }).catch( function( err ){
         // got an error
         alert( 'no worky! check console for deets' );
@@ -82,3 +95,11 @@ function divideOperator(){
     operator="/"
 }
 
+
+//clear the input of firstNumIn, secondNumIn, and the operator by setting it to an empty string 
+function clearButton(){
+        //empty input 
+        $('#firstNumIn').val('');
+        $('#secondNumIn').val('');
+        operator = ""
+}
