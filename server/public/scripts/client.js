@@ -1,20 +1,21 @@
 $( document ).ready( onReady );
 
 function onReady(){
-    $('#equalIn').on('click', calculate);
+    getCalculation();
+    //listeners, capture click events 
     $('#add').on('click', addOperator);
     $('#subtract').on('click', subtractOperator);
     $('#multiply').on('click', multiplyOperator);
     $('#divide').on('click', divideOperator);
-    getCalculation();
+    $('#equalIn').on('click', calculate);
 } // end onReady
 
 function getCalculation(){
     console.log( 'in calculation' );
-    // AJAX GET call to /calculation
+    // asking AJAX to perform a GET req to the url or /calculation
     $.ajax({
         method: 'GET',
-        url: '/calculation'
+        url: '/calculation' // go to server to look for the route to receive a GET request 
     }).then( function( response ){
         // if successful
         console.log( 'back from server successfully:', response  );
@@ -25,7 +26,7 @@ function getCalculation(){
         // loop thru array
         for( let i=0; i<response.length; i++){
             // append each on DOM
-            el.append( `<li>${response[i]}</li>`)
+            el.append( `<li>${response[i].firstNumber}${response[i].operation}${response[i].secondNumber}=${response[i].answer}</li>`)
         }
     }).catch( function( err ){
         // got an error
@@ -34,11 +35,10 @@ function getCalculation(){
     })
 }
 
-let operator = "";
 
 function calculate(){
     console.log( 'in calculate' );
-    // get user input & store in an object
+    // capture user input & store in an object
     //objectToSend is rec.body
     let objectToSend = {
         firstNumber: $( '#firstNumIn' ).val(),
@@ -47,11 +47,12 @@ function calculate(){
         operation: operator
     }
     console.log( 'sending:', objectToSend );
-    // make AJAX POST with the object
+    // make AJAX POST call with the object
     $.ajax({
         method: 'POST',
         url: '/calculation',
         data: objectToSend // must have data to send in a POST
+    //back from server to receive response 
     }).then( function( response ){
         // if successful, update DOM
         //getCalculation() will loop through the array of calculations from the server and display they to the DOM
@@ -63,6 +64,7 @@ function calculate(){
     })
 }
 
+let operator = "";
 
 function addOperator(){
     operator="+"
