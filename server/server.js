@@ -8,19 +8,18 @@ app.use( express.static( 'server/public' ) );
 app.use( bodyParser.urlencoded( { extended: true } ) );
 // globals
 const port = 5000;
-let calculation = [{ author: 'test', text: 'test text' }]
+let calculation = [];
 // spin up server
 app.listen( port, ()=>{
     console.log( 'server up on:', port );
 })
 
-
 // routes
 app.get( '/calculation', ( req, res )=>{
     console.log( '/calculation GET hit' ); // will show in server terminal
-    // res.send( calculation ); // our response
-    res.sendStatus(200);
+    res.send( calculation ); // our response
 })
+
 
 app.post( '/calculation', ( req, res )=>{
     console.log('hit on POST/calculations:', req.body);
@@ -39,5 +38,6 @@ app.post( '/calculation', ( req, res )=>{
         answer = Number(el.firstNumber) / Number(el.secondNumber);
     }
     console.log(answer);
+    calculation.push( answer );
     res.send( 200 ); // generic "OK", 201 = "CREATED"
 })

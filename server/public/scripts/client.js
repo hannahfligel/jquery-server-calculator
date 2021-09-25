@@ -23,10 +23,10 @@ function getCalculation(){
         // empty
         el.empty();
         // loop thru array
-        // for( let i=0; i<response.length; i++){
-        //     // append each on DOM
-        //     // el.append( `<li><strong>${response[i].author}</strong>: ${ response[i].text }</li>`)
-        // }
+        for( let i=0; i<response.length; i++){
+            // append each on DOM
+            el.append( `<li>${response[i]}</li>`)
+        }
     }).catch( function( err ){
         // got an error
         alert( 'no worky! check console for deets' );
@@ -39,6 +39,7 @@ let operator = "";
 function calculate(){
     console.log( 'in calculate' );
     // get user input & store in an object
+    //objectToSend is rec.body
     let objectToSend = {
         firstNumber: $( '#firstNumIn' ).val(),
         secondNumber: $( '#secondNumIn' ).val(),
