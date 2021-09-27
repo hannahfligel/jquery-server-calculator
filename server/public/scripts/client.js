@@ -3,10 +3,6 @@ $( document ).ready( onReady );
 function onReady(){
     getCalculation();
     //listeners, capture click events 
-    // $('#add').on('click', addOperator);
-    // $('#subtract').on('click', subtractOperator);
-    // $('#multiply').on('click', multiplyOperator);
-    // $('#divide').on('click', divideOperator);
     $('#equalIn').on('click', calculate);
     $('#clearIn').on('click', clearButton);
     $('.number').on('click', numberButton)
@@ -35,8 +31,9 @@ function getCalculation(){
         //append the last index of the calculations array which is an object and target the answer
             $('#previous-number').empty();
             answer.append(`${response[response.length-1].answer}`);
+            currentNumber=response[response.length-1].answer;
         }
-
+        
         // target output element of the full equation
         let el = $( '#calculationOut' );
         el.empty();
@@ -47,7 +44,7 @@ function getCalculation(){
 
     }).catch( function( err ){
         // got an error
-        alert( 'no worky! check console for deets' );
+        alert( 'Error! Check consol for details!' );
         console.log( 'error:', err );
     })
 }
@@ -59,8 +56,8 @@ function calculate(){
     // capture user input & store in an object
     //objectToSend is rec.body
     let objectToSend = {
-        firstNumber: currentNumber,
-        secondNumber: previousNumber,
+        firstNumber: previousNumber,
+        secondNumber: currentNumber,
         //set to start as an empty string
         operation: operator
     }
@@ -80,6 +77,7 @@ function calculate(){
         alert( 'error, check console for details' );
         console.log( err );
     })
+    
 }
 
 
@@ -92,8 +90,6 @@ let previousNumber = "";
 function operatorButton(){
     console.log($(this).data());
     operator = $(this).data().value;
-    // $(".operator").empty();
-    // $("#current-number").append(`<p>${currentNumber}</p>`);
     previousNumber = currentNumber;
     currentNumber = "";
     $('#current-number').empty();
@@ -108,27 +104,6 @@ function numberButton(){
 }
 
 
-
-
-
-// function addOperator(){
-//     operator="+"
-// }
-
-// function subtractOperator(){
-//     operator="-"
-// }
-
-// function multiplyOperator(){
-//     operator="*"
-// }
-
-// function divideOperator(){
-//     operator="/"
-// }
-
-
-//clear the input of firstNumIn, secondNumIn, and the operator by setting it to an empty string 
 function clearButton(){
         //empty input 
         $('#previous-number').empty();
