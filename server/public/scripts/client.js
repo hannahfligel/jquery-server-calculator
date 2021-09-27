@@ -97,7 +97,7 @@ function operatorButton(){
 }
 
 function numberButton(){
-    console.log($(this).data());
+    console.log($(this).data().value);
     currentNumber += $(this).data().value;
     $("#current-number").empty();
     $("#current-number").append(`${currentNumber}`);
