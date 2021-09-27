@@ -12,9 +12,10 @@
 
 </head>
 <body>
-        <h1>Server Side Calculator</h1>
+
 
         <div class="calculator-grid">
+            <!-- <h1 class="span-four">Server Side Calculator</h1> -->
             <div class="output">
                 <div data-previous-operand class="previous-operand" id="previous-number"></div>
                 <div data-current-operand class="current-operand" id="current-number"></div>
@@ -40,13 +41,12 @@
             <button data-value="." class="number">.</button>
             <!-- the equalIn button is the click submit -->
             <button data-equals class="span-two" id="equalIn">=</button>
+
+            <ul id="calculationOut">
+            </ul>
         </div>
 
 
-        <div id="answerOut"></div>
-
-        <ul id="calculationOut">
-        </ul>
 
 </body>
 </html>

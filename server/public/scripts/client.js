@@ -51,34 +51,38 @@ function getCalculation(){
 
 
 function calculate(){
-    
-    console.log( 'in calculate' );
-    // capture user input & store in an object
-    //objectToSend is rec.body
-    let objectToSend = {
-        firstNumber: previousNumber,
-        secondNumber: currentNumber,
-        //set to start as an empty string
-        operation: operator
+    //if the first number, operator, or second number weren't clicked on, send an alert
+    if(previousNumber === "" || currentNumber === "" || operator === ""){
+        alert( 'invalid expression' );
     }
-    console.log( 'sending:', objectToSend );
-    // make AJAX POST call with the object
-    $.ajax({
-        method: 'POST',
-        url: '/calculation',
-        data: objectToSend // must have data to send in a POST
-    //back from server to receive response 
-    }).then( function( response ){
-        // if successful, update DOM
-        //getCalculation() will loop through the array of calculations from the server and display they to the DOM
-        getCalculation();
-    }).catch( function( err ){
-        // catch any errors
-        alert( 'error, check console for details' );
-        console.log( err );
-    })
-    
-}
+    else{
+        console.log( 'in calculate' );
+        // capture user input & store in an object
+        //objectToSend is rec.body
+        let objectToSend = {
+            firstNumber: previousNumber,
+            secondNumber: currentNumber,
+            //set to start as an empty string
+            operation: operator
+        }
+        console.log( 'sending:', objectToSend );
+        // make AJAX POST call with the object
+        $.ajax({
+            method: 'POST',
+            url: '/calculation',
+            data: objectToSend // must have data to send in a POST
+        //back from server to receive response 
+        }).then( function( response ){
+            // if successful, update DOM
+            //getCalculation() will loop through the array of calculations from the server and display they to the DOM
+            getCalculation();
+        }).catch( function( err ){
+            // catch any errors
+            alert( 'error, check console for details' );
+            console.log( err );
+        })
+    }//end else 
+}//end funciton
 
 
 let operator = "";
