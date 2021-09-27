@@ -7,22 +7,86 @@
     <title>jQuery Server Calculator</title>
     <script src="vendors/jquery-3.6.0.min.js"></script>
     <script src="scripts/client.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="styles/style.css">
 
 </head>
 <body>
-
         <h1>Server Side Calculator</h1>
-        <input id="firstNumIn" type="number">
-        <button id="add">+</button>
-        <button id="subtract">-</button>
-        <button id="multiply">*</button>
-        <button id="divide">/</button>
-        <input id="secondNumIn" type="number">
-        <!-- the equalIn button is the click submit -->
-        <button id="equalIn">=</button>
-        <button id="clearIn">C</button>
+        <!-- <input id="firstNumIn" type="number">
+        <input id="secondNumIn" type="number"> -->
+
+        <div class="calculator-grid">
+            <div class="output">
+                <div data-previous-operand class="previous-operand" id="previous-number"></div>
+                <div data-current-operand class="current-operand" id="current-number"></div>
+            </div>
+            <button class="span-three" id="clearIn">AC</button>
+            <button data-value="/" class="operator" id="operator-clear">/</button>
+            <button data-value="7" class="number">7</button>
+            <button data-value="8" class="number">8</button>
+            <button data-value="9" class="number">9</button>
+            <button data-value="+" class="operator" id="operator-clear">+</button>
+
+            <button data-value="4" class="number">4</button>
+            <button data-value="5" class="number">5</button>
+            <button data-value="6" class="number">6</button>
+            <button data-value="-" class="operator" id="operator-clear">-</button>
+
+            <button data-value="1" class="number">1</button>
+            <button data-value="2" class="number">2</button>
+            <button data-value="3" class="number">3</button>
+            <button data-value="*" class="operator" id="operator-clear">*</button>
+
+            <button data-value="0" class="number">0</button>
+            <button data-value="." class="number">.</button>
+            <!-- the equalIn button is the click submit -->
+            <button data-equals class="span-two" id="equalIn">=</button>
+        </div>
+
+
+
+
+
+
+
+        <!-- <div class="col-4">
+            <div class="row">
+                <div class="display col-12"></div>
+            </div>
+            <div class="row">
+                <button class="col-9" id="clearIn" data-value="C">C</button>
+                <button class="col-3" id="divide">/</button>
+            </div>
+            <div class="row">
+                <button class="col">7</button>
+                <button class="col">8</button>
+                <button class="col">9</button>
+                <button class="col" id="add">+</button>
+            </div>
+
+            <div class="row">
+                <button class="col">4</button>
+                <button class="col">5</button>
+                <button class="col">6</button>
+                <button class="col" id="subtract">-</button>
+            </div>
+
+            <div class="row">
+                <button class="col">1</button>
+                <button class="col">2</button>
+                <button class="col">3</button>
+                <button class="col" id="multiply">*</button>
+            </div>
+
+            <div class="row">
+                <button class="col-6">0</button>
+                <button class="col-3">.</button>
+                <!-- the equalIn button is the click submit -->
+                <!-- <button class="col-3" id="equalIn">=</button>
+            </div>
+        </div> --> 
+
 
         <div id="answerOut"></div>
 
@@ -31,6 +95,6 @@
         </ul>
 
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script> -->
 
 </html>

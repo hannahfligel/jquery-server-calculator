@@ -3,13 +3,16 @@ $( document ).ready( onReady );
 function onReady(){
     getCalculation();
     //listeners, capture click events 
-    $('#add').on('click', addOperator);
-    $('#subtract').on('click', subtractOperator);
-    $('#multiply').on('click', multiplyOperator);
-    $('#divide').on('click', divideOperator);
+    // $('#add').on('click', addOperator);
+    // $('#subtract').on('click', subtractOperator);
+    // $('#multiply').on('click', multiplyOperator);
+    // $('#divide').on('click', divideOperator);
     $('#equalIn').on('click', calculate);
     $('#clearIn').on('click', clearButton);
+    $('.number').on('click', numberButton)
+    $('.operator').on('click', operatorButton);
 } // end onReady
+
 
 function getCalculation(){
     console.log( 'in calculation' );
@@ -21,16 +24,17 @@ function getCalculation(){
         // if successful
         console.log( 'back from server successfully:', response  );
         // target output element of the answer only 
-        let answer = $('#answerOut');
+        let answer = $('#current-number');
         // empty
         answer.empty();
         //if the length of the response (calculation array) is 0, append 0
         if(response.length === 0){
-            answer.append(`<h1>0</h1>`);
+            answer.append(`0`);
         }
         else {
         //append the last index of the calculations array which is an object and target the answer
-            answer.append(`<h1>${response[response.length-1].answer}</h1>`);
+            $('#previous-number').empty();
+            answer.append(`${response[response.length-1].answer}`);
         }
 
         // target output element of the full equation
@@ -39,7 +43,7 @@ function getCalculation(){
         // loop thru array
         for( let i=0; i<response.length; i++){
             // append each on DOM
-            el.append( `<li>${response[i].firstNumber}${response[i].operation}${response[i].secondNumber}=${response[i].answer}</li>`)        }   
+            el.append( `<li>${response[i].firstNumber}${response[i].operation}${response[i].secondNumber}=${response[i].answer}</li>`)}   
 
     }).catch( function( err ){
         // got an error
@@ -50,12 +54,13 @@ function getCalculation(){
 
 
 function calculate(){
+    
     console.log( 'in calculate' );
     // capture user input & store in an object
     //objectToSend is rec.body
     let objectToSend = {
-        firstNumber: $( '#firstNumIn' ).val(),
-        secondNumber: $( '#secondNumIn' ).val(),
+        firstNumber: currentNumber,
+        secondNumber: previousNumber,
         //set to start as an empty string
         operation: operator
     }
@@ -77,29 +82,58 @@ function calculate(){
     })
 }
 
+
 let operator = "";
+let currentNumber = "";
+let previousNumber = "";
 
-function addOperator(){
-    operator="+"
+
+
+function operatorButton(){
+    console.log($(this).data());
+    operator = $(this).data().value;
+    // $(".operator").empty();
+    // $("#current-number").append(`<p>${currentNumber}</p>`);
+    previousNumber = currentNumber;
+    currentNumber = "";
+    $('#current-number').empty();
+    $('#previous-number').append(`${previousNumber} ${operator}`);
 }
 
-function subtractOperator(){
-    operator="-"
+function numberButton(){
+    console.log($(this).data());
+    currentNumber += $(this).data().value;
+    $("#current-number").empty();
+    $("#current-number").append(`${currentNumber}`);
 }
 
-function multiplyOperator(){
-    operator="*"
-}
 
-function divideOperator(){
-    operator="/"
-}
+
+
+
+// function addOperator(){
+//     operator="+"
+// }
+
+// function subtractOperator(){
+//     operator="-"
+// }
+
+// function multiplyOperator(){
+//     operator="*"
+// }
+
+// function divideOperator(){
+//     operator="/"
+// }
 
 
 //clear the input of firstNumIn, secondNumIn, and the operator by setting it to an empty string 
 function clearButton(){
         //empty input 
-        $('#firstNumIn').val('');
-        $('#secondNumIn').val('');
-        operator = ""
+        $('#previous-number').empty();
+        $('#current-number').empty();
+        previousNumber="";
+        currentNumber="";
+        operator="";
 }
