@@ -1,6 +1,6 @@
 # Final Server Side Calculator:
 
-<img src="gif/calculator.gif">
+<img src="images/calculator.gif">
 
 
 ## Required Features
